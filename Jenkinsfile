@@ -36,23 +36,23 @@ pipeline {
                 }
             }
         }
-        // stage('docker build/push') {     
-        //     steps {
-        //         script {
-        //             docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
-        //                 def app = docker.build("massimilianovallascas/docker-nodejs-demo:${commit_id}", '.').push()
-        //             }   
-        //         }
-        //     }                 
-        // }     
+        stage('docker build/push') {     
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+                        def app = docker.build("massimilianovallascas/docker-nodejs-demo:${commit_id}", '.').push()
+                    }   
+                }
+            }                 
+        }     
     }
 
     post {
         failure {
-            // notify users when the Pipeline fails
-            // mail to: 'massimiliano.vallascas@gmail.com',
-            // subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-            // body: "Something is wrong with ${env.BUILD_URL}"
+            notify users when the Pipeline fails
+            mail to: 'massimiliano.vallascas@gmail.com',
+            subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+            body: "Something is wrong with ${env.BUILD_URL}"
         }
     }
 }
