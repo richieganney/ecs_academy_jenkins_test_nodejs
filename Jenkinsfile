@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
-                        def app = docker.build("massimilianovallascas/docker-nodejs-demo:${commit_id}", '.').push()
+                        def app = docker.build("richieganney/jenkins_practice:${BUILD_NUMBER}", '.').push()
                     }   
                 }
             }                 
